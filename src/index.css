@@ -1,71 +1,16 @@
 :root {
   --color-primary: #293c5a;
   --color-secondary: #c6b367;
-  --color-tertiary: #b3a44f;
+  /* --color-tertiary: #b3a44f; */
+  --color-tertiary: #a27035;
   --white: whitesmoke;
+  --grey: #f1f1f1;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.navBar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-primary);
-  width: 100%;
-  padding: 10px;
-}
-.navImage > a {
-  display: flex;
-  align-items: center;
-}
-.navImage > a > img {
-  width: 40px;
-  height: 40px;
-}
-.navImage > a > h1 {
-  font-size: 2rem;
-  color: var(--white);
-  padding-left: 10px;
-}
-
-.navLinks {
-  margin-left: auto;
-}
-.navLinks > ul {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-}
-.navLinks > ul > li > a {
-  display: block;
-  text-decoration: none;
-  padding-inline: 10px;
-  color: var(--white);
-  font-size: 1.125rem;
-}
-.navLinks > ul > li > a:hover {
-  transition: all 0.3s;
-  color: var(--color-secondary);
-}
-
-.navBtnGrp {
-  margin-left: 4rem;
-}
-.navBtnGrp > button {
-  font: inherit;
-  background-color: transparent;
-  border: 2px solid white;
-  padding: 0.5rem 1rem;
-  color: white;
-  margin: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.navBtnGrp > button:hover {
-  border: 2px solid white;
-  background-color: white;
-  color: var(--color-primary);
+body {
+  background-color: rgb(211, 211, 211);
 }
