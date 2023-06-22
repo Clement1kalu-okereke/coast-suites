@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .availableRooms {
   width: 100%;
   display: flex;
@@ -71,8 +74,60 @@ table {
   cursor: pointer;
 }
 
-.linkError{
+.linkError {
   display: block;
   text-align: center;
   font-size: x-large;
+}
+.cart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(75, 74, 74, 0.658);
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.cartContainer {
+  width: 70%;
+  margin: auto;
+  height: max(50%, 500px);
+  z-index: 2;
+  background-color: white;
+  display: grid;
+  grid-template-rows: 50px auto 50px;
+}
+.cartHeader {
+  text-align: center;
+  background-color: var(--color-secondary);
+  color: white;
+  padding: 15px 10px;
+}
+.cartFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+  background-color: var(--color-secondary);
+}
+.cartFooter > button {
+  font: inherit;
+  border: 1px solid var(--color-tertiary);
+  background-color: var(--color-tertiary);
+  color: white;
+  padding: 7px 15px;
+  cursor: pointer;
+}
+@media screen and (max-width: 920px) {
+  .availableRooms {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .availableRooms > section {
+    width: 100%!important;
+  }
 }

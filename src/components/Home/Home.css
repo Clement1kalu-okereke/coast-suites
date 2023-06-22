@@ -45,7 +45,8 @@
 }
 .reserve label {
   text-transform: uppercase;
-  padding-block: 7px;
+  padding-block-start: 1.5rem;
+  padding-block-end: 6px;
 }
 .reserve select {
   background-color: white;
@@ -97,4 +98,14 @@
   border: 1px solid var(--color-tertiary);
   padding: 10px 15px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 920px) {
+  .home {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .home > section {
+    width: 100%;
+  }
 }
