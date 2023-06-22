@@ -94,7 +94,7 @@ table {
 .cartContainer {
   width: 70%;
   margin: auto;
-  height: max(50%, 500px);
+  height: max(50vh, 600px);
   z-index: 2;
   background-color: white;
   display: grid;
@@ -128,6 +128,11 @@ table {
     gap: 15px;
   }
   .availableRooms > section {
-    width: 100%!important;
+    width: 100% !important;
+  }
+
+  .roomDeet {
+    flex-direction: column;
+    align-items: center;
   }
 }

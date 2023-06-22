@@ -26,7 +26,7 @@ function AvailableRooms(props) {
     return (
       <>
         <section className="roomDeet" key={random}>
-          <img src={detail.image} alt={detail.image} />
+          <img src={detail.image} alt={detail.image} className="roomDeetImg" />
           <section className="side">
             <h2>{detail.name}</h2>
             <p>{detail.details}</p>
