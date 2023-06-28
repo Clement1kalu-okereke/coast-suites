@@ -1,31 +1,80 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import roomDetails from "./roomDetails.js";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./AvailableRooms.css";
 function AvailableRooms(props) {
-  const [cartOpen, setCartOpen] = useState(false);
+  const [implementCartOpen, setImplementCartOpen] = useState(false);
+  const [total, setTotal] = useState(0);
   const [cartDetails, setCartDetails] = useState([]);
-  let navigate = useNavigate();
-  let handleCartClose = () => {
-    setCartOpen(!cartOpen);
-  };
 
-  props.userDatas
-    ? console.log(props.userDatas[0].formattedStartDate)
-    : console.log(props);
+  useEffect(() => {
+    setImplementCartOpen(props.cartOpen);
+  });
 
-  const random = Math.floor(Math.random() * 100000) + 1;
-
-  let roomDeets = roomDetails.map((detail) => {
-    const handleAddToCart = () => {
-      setCartDetails(detail);
-      console.log(cartOpen);
-      setCartOpen(!cartOpen);
+  useEffect(() => {
+    props.cartData.map(
+      (data) => {
+        console.log("Data Pricing" + data.pricing);
+        setTotal((prevTotal) => {
+          return prevTotal + data.pricing;
+        });
+      },
+      [props]
+    );
+  });
+  console.log(total);
+  console.log(implementCartOpen);
+  let CartData = props.cartData.map((data) => {
+    let handlePay = () => {
+      props.setCartOpen(!implementCartOpen);
     };
     return (
       <>
-        <section className="roomDeet" key={random}>
+        <section
+          className="roomDeet"
+          key={Math.floor(Math.random() * 1008000) + 1}
+        >
+          <img src={data.image} alt={data.image} className="roomDeetImg" />
+          <section className="side">
+            <h2>{data.name}</h2>
+            <p>{data.details}</p>
+            <ul>
+              {data.properties.map((prop) => {
+                return (
+                  <li key={Math.floor(Math.random() * 100000) + 1}>{prop}</li>
+                );
+              })}
+            </ul>
+            <section className="availableFoot">
+              <span>#{data.pricing}/Day</span>
+              <button className="addToCart" onClick={handlePay}>
+                Pay
+              </button>
+            </section>
+          </section>
+        </section>
+        <br />
+      </>
+    );
+  });
+
+  let roomDeets = roomDetails.map((detail) => {
+    const handleAddToCart = () => {
+      setCartDetails((prevCartDetails) => {
+        return [...prevCartDetails, detail];
+      });
+      props.setCartData((prevCartData) => {
+        return [...prevCartData, detail];
+      });
+    };
+
+    return (
+      <>
+        <section
+          className="roomDeet"
+          key={Math.floor(Math.random() * 1008000) + 1}
+        >
           <img src={detail.image} alt={detail.image} className="roomDeetImg" />
           <section className="side">
             <h2>{detail.name}</h2>
@@ -38,7 +87,7 @@ function AvailableRooms(props) {
               })}
             </ul>
             <section className="availableFoot">
-              <span>{detail.pricing}</span>
+              <span>#{detail.pricing}/Day</span>
               <button className="addToCart" onClick={handleAddToCart}>
                 Add To Cart
               </button>
@@ -49,6 +98,7 @@ function AvailableRooms(props) {
       </>
     );
   });
+
   return (
     <>
       {props.userDatas ? (
@@ -96,61 +146,19 @@ function AvailableRooms(props) {
           <Link to="/">Go Home</Link> and Input Details
         </span>
       )}
-      {cartOpen ? (
+      {implementCartOpen ? (
         <section className="cart">
-          <motion.section
-            initial={{ transform: "scale(0.2, 0.2)" }}
-            animate={{ transform: "scale(1, 1)" }}
-            transition={{ duration: 0.2 }}
-            className="cartContainer"
-          >
+          <section className="cartContainer">
             <section className="cartHeader">
-              <h2>Product Details</h2>
+              <h2>Total</h2>
+              <p>{total}</p>
             </section>
-            <section className="cartBody">
-              {cartDetails ? (
-                <section className="roomDeet" key={random}>
-                  <img src={cartDetails.image} alt={cartDetails.image} />
-                  <section className="side">
-                    <h2>{cartDetails.name}</h2>
-                    <p>{cartDetails.details}</p>
-                    <ul>
-                      {cartDetails.properties.map((prop) => {
-                        return (
-                          <li key={Math.floor(Math.random() * 100000) + 1}>
-                            {prop}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                    <section className="availableFoot">
-                      <span>{cartDetails.pricing}</span>
-                      <button className="addToCart">Add To Cart</button>
-                    </section>
-                  </section>
-                </section>
-              ) : (
-                "Body"
-              )}
-            </section>
-            <section className="cartFooter">
-              <button
-                onClick={() => {
-                  setCartOpen(!cartOpen);
-                  alert("Successfully Purchased");
-                  navigate("/");
-                }}
-              >
-                Buy
-              </button>
-              <button onClick={handleCartClose}>Close</button>
-            </section>
-          </motion.section>
+            {CartData}
+          </section>
         </section>
       ) : (
         <></>
       )}
-      )
     </>
   );
 }
