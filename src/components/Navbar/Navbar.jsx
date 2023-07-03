@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
+import Logo from "/src/assets/Asset 1Logop.png";
 function Navbar(props) {
   const handleClick = () => {
     props.setCartOpen(!props.cartOpen);
@@ -12,7 +13,7 @@ function Navbar(props) {
       <section className="navBar">
         <section className="navImage">
           <Link to="/">
-            <img src="/src/assets/Asset 1Logop.png" alt="Logo" />
+            <img src={Logo} alt="Logo" />
             <h1>Coast Suites</h1>
           </Link>
         </section>
