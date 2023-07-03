@@ -28,6 +28,7 @@ function AvailableRooms(props) {
   let CartData = props.cartData.map((data) => {
     let handlePay = () => {
       props.setCartOpen(!implementCartOpen);
+      alert("Input Card Details and proceed to checkout");
     };
     return (
       <>
