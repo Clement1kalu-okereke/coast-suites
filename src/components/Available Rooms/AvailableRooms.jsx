@@ -12,17 +12,6 @@ function AvailableRooms(props) {
     setImplementCartOpen(props.cartOpen);
   });
 
-  useEffect(() => {
-    props.cartData.map(
-      (data) => {
-        console.log("Data Pricing" + data.pricing);
-        setTotal((prevTotal) => {
-          return prevTotal + data.pricing;
-        });
-      },
-      [props]
-    );
-  });
   console.log(total);
   console.log(implementCartOpen);
   let CartData = props.cartData.map((data) => {
