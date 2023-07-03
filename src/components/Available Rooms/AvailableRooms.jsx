@@ -1,8 +1,10 @@
+// Umu Olugu
 import { useState, useEffect } from "react";
 import roomDetails from "./roomDetails.js";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./AvailableRooms.css";
+
 function AvailableRooms(props) {
   const [implementCartOpen, setImplementCartOpen] = useState(false);
   const [total, setTotal] = useState(0);
@@ -11,9 +13,18 @@ function AvailableRooms(props) {
   useEffect(() => {
     setImplementCartOpen(props.cartOpen);
   });
-
+  let initial = 0;
   console.log(total);
-  console.log(implementCartOpen);
+  console.log(props.cartData);
+  let pricingTotal =
+    props.cartData.length === 0
+      ? initial
+      : props.cartData.reduce((total, item) => {
+          return total + item.pricing;
+        }, 0);
+
+  // let pricingTotal = 0;
+
   let CartData = props.cartData.map((data) => {
     let handlePay = () => {
       props.setCartOpen(!implementCartOpen);
@@ -137,10 +148,18 @@ function AvailableRooms(props) {
       )}
       {implementCartOpen ? (
         <section className="cart">
+          <div
+            className="close"
+            onClick={() => {
+              props.setCartOpen(!implementCartOpen);
+            }}
+          >
+            X
+          </div>
           <section className="cartContainer">
             <section className="cartHeader">
               <h2>Total</h2>
-              <p>{total}</p>
+              <p>{pricingTotal}</p>
             </section>
             {CartData}
           </section>
